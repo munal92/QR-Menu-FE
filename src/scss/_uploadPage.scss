@@ -1,0 +1,15 @@
+.uploadPageHero {
+  min-height: 92vh;
+  background-color: $mint-cream;
+}
+
+.uploadImage {
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.uploadImageUploaded {
+  cursor: pointer;
+}
