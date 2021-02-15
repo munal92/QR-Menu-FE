@@ -9,9 +9,14 @@ import QRPage from "./components/QRPage";
 function App() {
   const history = useHistory();
   const [urlLink, setUrlLink] = useState({
-    Link: "www.google.com",
+    name: "",
+    email: "",
+    id: "",
+    Link: "NONE",
+    fileName: "",
     title: "",
   });
+
   // useEffect(() => {
   //   const token = window.localStorage.getItem("StayLogIN");
 
@@ -24,7 +29,7 @@ function App() {
   // }, []);
   return (
     <>
-      <Navibar />
+      <Navibar urlLink={urlLink} />
       <Switch>
         {/* <Route path="/user">
           <UploadPage />

@@ -13,6 +13,7 @@ const SignUpForm = () => {
 
   const history = useHistory();
   const [show, setShow] = useState(true);
+
   const [vibrate, setVibrate] = useState({
     clsName: "",
   });

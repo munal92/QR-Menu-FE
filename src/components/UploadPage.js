@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
@@ -10,6 +10,7 @@ import {
   Image,
   InputGroup,
   FormControl,
+  Form,
 } from "react-bootstrap";
 import grayBg from "../img/graybg.png";
 import grayBgUpload from "../img/graybgupload.jpg";
@@ -19,9 +20,30 @@ const UploadPage = (props) => {
   const inputFile = useRef(null);
   const [selectedFile, SetSelectedFile] = useState({
     fileName: "",
-    fileLink: null,
+    fileLink: "null",
     uploadSuccess: false,
+    userAlert: "*Maximum upload .pdf file size: 5 MB.",
   });
+
+  useEffect(() => {
+    const email = window.localStorage.getItem("userEmail");
+    axiosWithAuth()
+      .post("/api/user/find", { email: email })
+      .then((res) => {
+        console.log("bura", res);
+        props.setUrlLink({
+          ...props.urlLink,
+          name: res.data.name,
+          email: res.data.email,
+          id: res.data._id,
+          Link: res.data.fileLink,
+          fileName: res.data.fileName,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const onButtonClick = () => {
     // `current` points to the mounted file input element
@@ -47,59 +69,140 @@ const UploadPage = (props) => {
 
     const fd = new FormData();
     fd.append("upload", selectedFile.fileLink);
-    fd.append("name", selectedFile.name);
+    fd.append("fileName", selectedFile.fileName);
     console.log("button basildi", fd);
 
     axiosWithAuth()
-      .put(`/api/user/addinfo/6026c26db94e1b1540114184`, fd)
+      .put(`/api/user/addinfo/${props.urlLink.id}`, fd)
       .then((res) => {
-        props.setUrlLink({ ...props.urlLink, Link: res.data.fileLink });
+        props.setUrlLink({
+          ...props.urlLink,
+          fileName: res.data.fileName,
+          Link: res.data.fileLink,
+        });
         SetSelectedFile({ ...selectedFile, uploadSuccess: true });
       })
       .catch((err) => {
+        SetSelectedFile({
+          ...selectedFile,
+          userAlert: "File could not be uploaded. File must be .pdf format",
+        });
         console.log(err);
       });
   };
 
-  console.log(selectedFile);
+  const handleDeleteFile = (e) => {
+    e.preventDefault();
+    console.log({
+      fileLink: selectedFile.fileLink,
+    });
+
+    if (e.target.id === "removeSelection") {
+      SetSelectedFile({
+        ...selectedFile,
+        fileName: "",
+        fileLink: null,
+        uploadSuccess: false,
+        userAlert: "*Maximum upload .pdf file size: 5 MB.",
+      });
+      inputFile.current.value = null;
+    } else {
+      axiosWithAuth()
+        .put(`/api/user/delfile/${props.urlLink.id}`, {
+          fileLink: props.urlLink.Link,
+        })
+        .then((res) => {
+          console.log("delete", res);
+          props.setUrlLink({
+            ...props.urlLink,
+            fileName: "",
+            Link: "NONE",
+          });
+          SetSelectedFile({
+            ...selectedFile,
+            fileName: "",
+            fileLink: null,
+            uploadSuccess: false,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  console.log("selected", selectedFile);
 
   console.log("URL STATE", props.urlLink);
   return (
     <div className="uploadPageHero">
       <Container className="d-flex flex-column justify-content-center pt-5 pb-5">
-        <Row className="">
+        <Row>
           <Col>
-            <h3>Hi Fatih,</h3>
+            <h3>Hi {props.urlLink.name},</h3>
           </Col>
         </Row>
         <Row className="mt-4">
           <Col>
-            {selectedFile.fileLink === null ? (
+            {props.urlLink.Link === "NONE" && selectedFile.fileName === "" ? (
               <Image
                 className="uploadImage"
                 onClick={onButtonClick}
                 src={grayBgUpload}
                 fluid
               />
-            ) : selectedFile.uploadSuccess !== true ? (
-              <h4 style={{ color: "#007BFF" }}>
-                File Selected: {selectedFile.fileName}
-              </h4>
-            ) : (
+            ) : props.urlLink.Link === "NONE" &&
+              selectedFile.fileName !== "" ? (
+              <Row>
+                <Col md={7} xs={10}>
+                  <h5 style={{ color: "#007BFF" }}>
+                    File Selected: {selectedFile.fileName}
+                  </h5>
+                </Col>
+
+                <Col md={5} xs={2}>
+                  <i
+                    style={{
+                      color: "red",
+                      alignSelf: "center",
+                      cursor: "pointer",
+                    }}
+                    className="far fa-times-circle fa-lg mb-1"
+                    id="removeSelection"
+                    onClick={handleDeleteFile}
+                  ></i>
+                </Col>
+              </Row>
+            ) : selectedFile.uploadSuccess === true ? (
               <Image
                 className="uploadImageUploaded"
                 onClick={onButtonClick}
                 src={grayBgUploadSuccess}
                 fluid
               />
+            ) : (
+              <>
+                <Row>
+                  <Col md={7} xs={10} style={{ color: "#007BFF" }}>
+                    <h5>Uploaded File: {props.urlLink.fileName}</h5>
+                  </Col>
+
+                  <Col md={5} xs={2}>
+                    <i
+                      style={{
+                        color: "red",
+
+                        cursor: "pointer",
+                      }}
+                      id="deleteFile"
+                      className="far fa-trash-alt fa-lg"
+                      onClick={handleDeleteFile}
+                    ></i>
+                  </Col>
+                </Row>
+              </>
             )}
 
-            {/* <input
-              type="file"
-              id="imgupload"
-              name="upload"
-              style={{ display: "none" }}
-            /> */}
             <input
               type="file"
               name="upload"
@@ -107,7 +210,12 @@ const UploadPage = (props) => {
               style={{ display: "none" }}
               onChange={handleChangeFile}
             />
-            <p>*Maximum upload file size: 5 MB.</p>
+            {selectedFile.userAlert ===
+            "*Maximum upload .pdf file size: 5 MB." ? (
+              <p>{selectedFile.userAlert}</p>
+            ) : (
+              <p style={{ color: "#df4759" }}>{selectedFile.userAlert}</p>
+            )}
           </Col>
         </Row>
 
@@ -129,28 +237,49 @@ const UploadPage = (props) => {
           </Col>
         </Row>
         <Row className=" mt-3">
-          <Col xs={12}>
-            <Button
-              onClick={handleUpload}
-              className=" mr-2"
-              size="lg"
-              variant="success"
-            >
-              Upload
-            </Button>{" "}
-            <Button
-              as={Link}
-              to="/user/qrcode"
-              className=" mr-2"
-              size="lg"
-              variant="primary"
-            >
-              QR code
-            </Button>{" "}
-            <Button size="lg" variant="danger">
+          {props.urlLink.Link !== "NONE" ? (
+            <Col xs={12}>
+              {" "}
+              <Button
+                onClick={handleUpload}
+                className=" mr-2"
+                size="md"
+                variant="success"
+                disabled
+              >
+                Upload
+              </Button>{" "}
+              <Button
+                as={Link}
+                to="/user/qrcode"
+                className=" mr-2"
+                size="md"
+                variant="primary"
+              >
+                QR code
+              </Button>{" "}
+            </Col>
+          ) : (
+            <Col xs={12}>
+              {" "}
+              <Button
+                onClick={handleUpload}
+                className=" mr-2"
+                size="md"
+                variant="success"
+              >
+                Upload
+              </Button>
+              <Button className=" mr-2" size="md" variant="primary" disabled>
+                QR code
+              </Button>
+            </Col>
+          )}
+
+          {/* <Button size="lg" variant="danger">
               Delete
-            </Button>{" "}
-          </Col>
+            </Button>{" "} */}
+
           {/* <Col xs={5}>
             
           </Col>

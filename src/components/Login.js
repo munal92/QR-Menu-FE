@@ -12,6 +12,7 @@ const Login = () => {
   });
   const history = useHistory();
   const [show, setShow] = useState(true);
+  const [isCredentials, isSetCredentials] = useState(true);
   const [vibrate, setVibrate] = useState({
     clsName: "",
   });
@@ -49,14 +50,22 @@ const Login = () => {
         .post("/api/auth/signin", signInForm.credientials)
         .then((res) => {
           window.localStorage.setItem("token", res.data.token);
+
           if (signInForm.isChecked) {
             window.localStorage.setItem("StayLogIN", true);
           } else {
             window.localStorage.setItem("StayLogIN", false);
           }
+          window.localStorage.setItem(
+            "userEmail",
+            signInForm.credientials.email
+          );
           history.push("/user");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          isSetCredentials(false);
+        });
     } else {
       setVibrate({ clsName: "error" });
 
@@ -65,6 +74,8 @@ const Login = () => {
       }, 1000);
     }
   };
+
+  console.log("credentials", signInForm.credientials);
 
   return (
     <>
@@ -87,6 +98,14 @@ const Login = () => {
               </Row>
               <Row>
                 <Col>
+                  {isCredentials ? (
+                    ""
+                  ) : (
+                    <Form.Text className="alert-text-form">
+                      Invalid credentials!
+                    </Form.Text>
+                  )}
+
                   <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -95,6 +114,7 @@ const Login = () => {
                       name="email"
                       onChange={handleChange}
                     />
+
                     <Form.Text className="text-muted">
                       Sign In and start to create a QR Code
                     </Form.Text>

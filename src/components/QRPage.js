@@ -34,7 +34,23 @@ const QRPage = (props) => {
 
   return (
     <div className="qrHero">
-      {printPageStatus ? (
+      {props.urlLink.Link === "NONE" ? (
+        <Container className="pt-5 ">
+          <Row className=" pt-5">
+            <Col className=" text-center" xs={12}>
+              {" "}
+              <h1>Please Upload a File</h1>{" "}
+            </Col>
+          </Row>
+          <Row className="pt-5">
+            <Col className=" text-center" xs={12}>
+              <Button size="lg" href="/user">
+                Return
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      ) : printPageStatus ? (
         <Container className="pt-5 ">
           <Row className=" pt-5">
             <Col className=" text-center" xs={12}>
