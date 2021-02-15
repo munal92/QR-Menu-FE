@@ -6,8 +6,8 @@ const axiosWithAuth = () => {
     headers: {
       authorization: token,
     },
-    baseURL: "http://localhost:5000/",
-    // baseURL: "https://qr-menu-mf.herokuapp.com/",
+    // baseURL: "http://localhost:5000/",
+    baseURL: "https://qr-menu-mf.herokuapp.com/",
   });
 };
 
