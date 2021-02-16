@@ -24,7 +24,7 @@ const Home = () => {
               </Row>
             </Col>
             <Col md={6} className="imageCol pl-5">
-              <Image src={phoneImg}></Image>
+              <Image src={phoneImg} fluid></Image>
             </Col>
           </Row>
         </Container>
