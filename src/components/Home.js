@@ -8,22 +8,22 @@ const Home = () => {
   return (
     <>
       <div className="containerHeader">
-        <Container>
-          <Row className="titleHome align-items-center">
-            <Col md={6} xs={10}>
-              <Row className="headerTitle align-items-center">
+        <Container className=" p-5">
+          <Row className="titleHome">
+            <Col lg={6} className="justify-content-center align-self-center">
+              <Row className="headerTitle justify-content-center text-center mb-2">
                 Create a QR menu for your restaurant
               </Row>
-              <Row className="headerSubTitle align-items-center mt-3">
+              <Row className="headerSubTitle justify-content-center mb-5">
                 Quick.Simple.Free.
               </Row>
-              <Row className="homeButtonCont align-items-center mt-5">
+              <Row className="homeButtonCont justify-content-center mb-5">
                 <Button href="#signupF" size="lg" variant="teal1">
                   Sign Up
                 </Button>{" "}
               </Row>
             </Col>
-            <Col md={6} className="imageCol pl-5">
+            <Col lg={6} className="imageCol ">
               <Image src={phoneImg} fluid></Image>
             </Col>
           </Row>
