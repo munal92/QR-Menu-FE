@@ -65,6 +65,11 @@ const Login = () => {
         .catch((err) => {
           console.log(err);
           isSetCredentials(false);
+          setVibrate({ clsName: "error" });
+
+          setTimeout(() => {
+            setVibrate({ clsName: "" });
+          }, 1000);
         });
     } else {
       setVibrate({ clsName: "error" });

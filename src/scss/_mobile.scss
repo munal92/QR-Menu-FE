@@ -1,6 +1,7 @@
 @media (max-width: 576px) {
   .containerHeader {
     background-color: $mint-cream;
+    min-height: 72vh;
   }
   .imageCol {
     display: none;
@@ -23,4 +24,22 @@
 
 // Medium devices (tablets, 768px and up)
 @media (max-width: 767px) {
+  .containerHeader {
+    background-color: $mint-cream;
+    min-height: 72vh;
+  }
+  .imageCol {
+    display: none;
+  }
+  .titleHome {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .homeButtonCont {
+    justify-content: center;
+  }
+  .headerSubTitle {
+    justify-content: center;
+  }
 }

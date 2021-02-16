@@ -10,17 +10,12 @@ const SignUpForm = () => {
       password: "",
     },
   });
-
+  const [isCredentials, isSetCredentials] = useState(true);
   const history = useHistory();
-  const [show, setShow] = useState(true);
 
   const [vibrate, setVibrate] = useState({
     clsName: "",
   });
-  const handleClose = () => {
-    setShow(false);
-    history.push("/");
-  };
 
   const handleChange = (e) => {
     e.persist();
@@ -44,14 +39,25 @@ const SignUpForm = () => {
       axiosWithAuth()
         .post("/api/auth/signup", signUpForm.credientials)
         .then((res) => {
+          console.log("SIGNUP", res.data);
           window.localStorage.setItem("token", res.data.token);
 
           window.localStorage.setItem("StayLogIN", false);
 
           window.localStorage.setItem("userEmail", res.data.email);
-          history.push("/user");
+          setTimeout(() => {
+            history.push("/user");
+          }, 2000);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          isSetCredentials(false);
+          setVibrate({ clsName: "error" });
+
+          setTimeout(() => {
+            setVibrate({ clsName: "" });
+          }, 1000);
+        });
     } else {
       setVibrate({ clsName: "error" });
 
@@ -69,6 +75,13 @@ const SignUpForm = () => {
         <Row className=" justify-content-center pt-3">
           <Col md={6}>
             <Form onSubmit={submitForm} className={vibrate.clsName}>
+              {isCredentials ? (
+                ""
+              ) : (
+                <Form.Text className="alert-text-form">
+                  Email address is already taken. Please choose another one.
+                </Form.Text>
+              )}
               <Form.Group controlId="formBasicName">
                 <Form.Label id="signupF">Name</Form.Label>
                 <Form.Control

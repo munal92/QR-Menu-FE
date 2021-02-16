@@ -2,6 +2,7 @@ import React from "react";
 import SignUpForm from "./SignUpForm.js";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import phoneImg from "../img/phoneHe.png";
+import MidSection from "./MidSection.js";
 
 const Home = () => {
   return (
@@ -17,7 +18,7 @@ const Home = () => {
                 Quick.Simple.Free.
               </Row>
               <Row className="homeButtonCont align-items-center mt-5">
-                <Button href="#signupF" size="lg" variant="warning">
+                <Button href="#signupF" size="lg" variant="teal1">
                   Sign Up
                 </Button>{" "}
               </Row>
@@ -28,7 +29,7 @@ const Home = () => {
           </Row>
         </Container>
       </div>
-
+      <MidSection />
       <SignUpForm />
     </>
   );

@@ -17,18 +17,60 @@
 }
 
 .SignupHero {
-  background-color: $turquoise;
+  background-color: $mint-cream;
+
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  Button {
+    background-color: teal;
+    &:hover {
+      background-color: $midnight-green;
+    }
+  }
+}
+
+.alert-text-form {
+  color: #df4759;
+}
+
+.MidSecHero {
+  background-color: teal;
   color: white;
   min-height: 72vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  Button {
-    background-color: $tomatored;
-  }
 }
 
-.alert-text-form {
-  color: #df4759;
+/* footer  */
+#footerSec {
+  background-color: teal;
+  padding: 1rem;
+  text-align: center;
+}
+.footerWrapper {
+  color: white;
+  h4 {
+    font-size: 1.1rem;
+  }
+}
+.socialMed_cont {
+  display: flex;
+
+  justify-content: center;
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+}
+.socialMed_cont a {
+  color: white;
+  text-decoration: none;
+  transform: scale(1);
+}
+.socialMed_cont a:hover {
+  color: yellowgreen;
+  transform: scale(1.2);
 }

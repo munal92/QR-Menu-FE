@@ -221,7 +221,7 @@ const UploadPage = (props) => {
         </Row>
 
         <Row className=" mt-4">
-          <Col>
+          <Col sm={5}>
             <InputGroup className="mb-3">
               <InputGroup.Prepend>
                 <InputGroup.Text id="inputGroup-sizing-default">

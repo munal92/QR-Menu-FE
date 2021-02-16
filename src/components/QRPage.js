@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import QRCodeLib from "qrcode";
 import { Button, Container, Row, Col, Image } from "react-bootstrap";
 const QRPage = (props) => {
@@ -9,10 +9,11 @@ const QRPage = (props) => {
 
   function handlePrint() {
     setPrintPageStatus(true);
-
+    props.setHideFooter(true);
     setTimeout(() => {
       window.print();
       setPrintPageStatus(false);
+      props.setHideFooter(false);
     }, 2000);
   }
 

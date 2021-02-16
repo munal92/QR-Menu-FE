@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { Switch, Route, useHistory } from "react-router-dom";
 import UploadPage from "./components/UploadPage";
 import QRPage from "./components/QRPage";
+import Footer from "./components/Footer";
 function App() {
   const history = useHistory();
   const [urlLink, setUrlLink] = useState({
@@ -16,16 +17,25 @@ function App() {
     fileName: "",
     title: "",
   });
+  const [hideFooter, setHideFooter] = useState(false);
 
-  // useEffect(() => {
-  //   const token = window.localStorage.getItem("StayLogIN");
+  useEffect(() => {
+    const token = window.localStorage.getItem("StayLogIN");
+    //console.log("app.js token 92", token);
 
-  //   if (token === "true") {
-  //     history.push("/user");
-  //   } else {
-  //     window.localStorage.removeItem("token");
-  //     //  history.push("/");
-  //   }
+    if (token == "false") {
+      window.localStorage.clear();
+    }
+  }, []);
+
+  // const token = window.localStorage.getItem("StayLogIN");
+
+  // if (token === "true") {
+  //   history.push("/user");
+  // } else {
+  //   window.localStorage.removeItem("token");
+  //   //  history.push("/");
+  // }
   // }, []);
   return (
     <>
@@ -38,6 +48,8 @@ function App() {
           path="/user/qrcode"
           urlLink={urlLink}
           setUrlLink={setUrlLink}
+          hideFooter={hideFooter}
+          setHideFooter={setHideFooter}
           component={QRPage}
         />
         <PrivateRoute
@@ -51,6 +63,8 @@ function App() {
           <Home />
         </Route>
       </Switch>
+
+      <Footer hideFooter={hideFooter} />
     </>
   );
 }
