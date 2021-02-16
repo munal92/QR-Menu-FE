@@ -67,7 +67,7 @@ const SignUpForm = () => {
     }
   };
   return (
-    <div className="SignupHero ">
+    <div className="SignupHero">
       <Container className="p-4">
         <Row className="justify-content-center">
           <h2>Sign Up Now!</h2>

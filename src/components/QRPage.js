@@ -14,7 +14,7 @@ const QRPage = (props) => {
       window.print();
       setPrintPageStatus(false);
       props.setHideFooter(false);
-    }, 2000);
+    }, 1000);
   }
 
   QRCodeLib.toDataURL(props.urlLink.Link, {
