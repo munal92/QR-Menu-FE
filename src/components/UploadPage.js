@@ -27,6 +27,7 @@ const UploadPage = (props) => {
 
   useEffect(() => {
     const email = window.localStorage.getItem("userEmail");
+    console.log("Email", email);
     axiosWithAuth()
       .post("/api/user/find", { email: email })
       .then((res) => {

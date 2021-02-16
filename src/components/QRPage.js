@@ -13,7 +13,7 @@ const QRPage = (props) => {
     setTimeout(() => {
       window.print();
       setPrintPageStatus(false);
-    }, 1000);
+    }, 2000);
   }
 
   QRCodeLib.toDataURL(props.urlLink.Link, {

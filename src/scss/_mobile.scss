@@ -1,4 +1,21 @@
 @media (max-width: 576px) {
+  .containerHeader {
+    background-color: $mint-cream;
+  }
+  .imageCol {
+    display: none;
+  }
+  .titleHome {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .homeButtonCont {
+    justify-content: center;
+  }
+  .headerSubTitle {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 900px) {

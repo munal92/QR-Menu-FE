@@ -1,25 +1,29 @@
 import React from "react";
 import SignUpForm from "./SignUpForm.js";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import phoneImg from "../img/phoneHe.png";
 
 const Home = () => {
   return (
     <>
-      <div className="containerHeader d-flex justify-content-center pt-5">
-        <Container fluid="md" className="mt-5 mb-4 ">
-          <Row className="text-center pr-1 pl-1">
-            <Col>
-              <Row className="headerTitle justify-content-center">
+      <div className="containerHeader">
+        <Container>
+          <Row className="titleHome align-items-center">
+            <Col md={6} xs={10}>
+              <Row className="headerTitle align-items-center">
                 Create a QR menu for your restaurant
               </Row>
-              <Row className="headerSubTitle justify-content-center mt-3">
+              <Row className="headerSubTitle align-items-center mt-3">
                 Quick.Simple.Free.
               </Row>
-              <Row className="justify-content-center mt-5">
-                <Button size="lg" variant="warning">
+              <Row className="homeButtonCont align-items-center mt-5">
+                <Button href="#signupF" size="lg" variant="warning">
                   Sign Up
                 </Button>{" "}
               </Row>
+            </Col>
+            <Col md={6} className="imageCol pl-5">
+              <Image src={phoneImg}></Image>
             </Col>
           </Row>
         </Container>

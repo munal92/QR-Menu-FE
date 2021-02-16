@@ -51,6 +51,10 @@ body {
 }
 
 .containerHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-height: 92vh;
   background-color: #f7fff7;
 }
@@ -69,6 +73,10 @@ body {
   background-color: #4ecdc4;
   color: white;
   min-height: 72vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .SignupHero Button {
@@ -104,6 +112,26 @@ body {
 .qr-image {
   width: 20rem;
   height: 20rem;
+}
+
+@media (max-width: 576px) {
+  .containerHeader {
+    background-color: #f7fff7;
+  }
+  .imageCol {
+    display: none;
+  }
+  .titleHome {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .homeButtonCont {
+    justify-content: center;
+  }
+  .headerSubTitle {
+    justify-content: center;
+  }
 }
 
 /*!

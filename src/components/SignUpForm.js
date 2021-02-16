@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 const SignUpForm = () => {
@@ -44,6 +44,11 @@ const SignUpForm = () => {
       axiosWithAuth()
         .post("/api/auth/signup", signUpForm.credientials)
         .then((res) => {
+          window.localStorage.setItem("token", res.data.token);
+
+          window.localStorage.setItem("StayLogIN", false);
+
+          window.localStorage.setItem("userEmail", res.data.email);
           history.push("/user");
         })
         .catch((err) => console.log(err));
@@ -56,45 +61,54 @@ const SignUpForm = () => {
     }
   };
   return (
-    <div className="SignupHero">
-      <Container className="d-flex flex-column justify-content-center pt-5 pb-5 ">
-        <Form onSubmit={submitForm} className={vibrate.clsName}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="name"
-              placeholder="Enter name"
-              name="name"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              name="email"
-              onChange={handleChange}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+    <div className="SignupHero ">
+      <Container className="p-4">
+        <Row className="justify-content-center">
+          <h2>Sign Up Now!</h2>
+        </Row>
+        <Row className=" justify-content-center pt-3">
+          <Col md={6}>
+            <Form onSubmit={submitForm} className={vibrate.clsName}>
+              <Form.Group controlId="formBasicName">
+                <Form.Label id="signupF">Name</Form.Label>
+                <Form.Control
+                  type="name"
+                  placeholder="Enter name"
+                  name="name"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  name="email"
+                  onChange={handleChange}
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          {/* <Form.Group controlId="formBasicCheckbox">
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              {/* <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group> */}
-          <Button type="submit">Sign Up!</Button>
-        </Form>
+              <Row className="justify-content-center pt-4">
+                <Button type="submit">Sign Up!</Button>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
       </Container>
     </div>
   );
