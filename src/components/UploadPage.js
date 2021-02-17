@@ -27,11 +27,10 @@ const UploadPage = (props) => {
 
   useEffect(() => {
     const email = window.localStorage.getItem("userEmail");
-    console.log("Email", email);
+
     axiosWithAuth()
       .post("/api/user/find", { email: email })
       .then((res) => {
-        console.log("bura", res);
         props.setUrlLink({
           ...props.urlLink,
           name: res.data.name,
@@ -48,12 +47,11 @@ const UploadPage = (props) => {
   const [show, setShow] = useState(false);
 
   const onButtonClick = () => {
-    // `current` points to the mounted file input element
     inputFile.current.click();
   };
   const handleChangeFile = (e) => {
     e.persist();
-    console.log("Yuklendi", e.target.files[0]);
+
     SetSelectedFile({
       ...selectedFile,
       fileLink: e.target.files[0],
@@ -62,7 +60,6 @@ const UploadPage = (props) => {
   };
   const handlerChangeText = (e) => {
     e.persist();
-    //console.log("Yuklendi", e.target.value);
     props.setUrlLink({ ...props.urlLink, title: e.target.value });
   };
 
@@ -72,7 +69,6 @@ const UploadPage = (props) => {
     const fd = new FormData();
     fd.append("upload", selectedFile.fileLink);
     fd.append("fileName", selectedFile.fileName);
-    console.log("button basildi", fd);
 
     axiosWithAuth()
       .put(`/api/user/addinfo/${props.urlLink.id}`, fd)
@@ -98,9 +94,6 @@ const UploadPage = (props) => {
   const handleDeleteFile = (e) => {
     e.preventDefault();
     setShow(true);
-    console.log({
-      fileLink: selectedFile.fileLink,
-    });
 
     if (e.target.id === "removeSelection") {
       setShow(false);
@@ -118,7 +111,6 @@ const UploadPage = (props) => {
           fileLink: props.urlLink.Link,
         })
         .then((res) => {
-          console.log("delete", res);
           props.setUrlLink({
             ...props.urlLink,
             fileName: "",
@@ -139,9 +131,6 @@ const UploadPage = (props) => {
     }
   };
 
-  console.log("selected", selectedFile);
-
-  console.log("URL STATE", props.urlLink);
   return (
     <div className="uploadPageHero">
       <Container className="d-flex flex-column justify-content-center pt-5 pb-5 ">

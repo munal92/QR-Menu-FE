@@ -39,11 +39,8 @@ const SignUpForm = () => {
       axiosWithAuth()
         .post("/api/auth/signup", signUpForm.credientials)
         .then((res) => {
-          console.log("SIGNUP", res.data);
           window.localStorage.setItem("token", res.data.token);
-
           window.localStorage.setItem("StayLogIN", false);
-
           window.localStorage.setItem("userEmail", res.data.email);
           setTimeout(() => {
             history.push("/user");

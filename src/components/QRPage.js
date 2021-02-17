@@ -4,8 +4,6 @@ import { Button, Container, Row, Col, Image } from "react-bootstrap";
 const QRPage = (props) => {
   const [urlData, setUrlData] = useState("");
   const [printPageStatus, setPrintPageStatus] = useState(false);
-  console.log("URL Link", props.urlLink.Link);
-  //   console.log("URL Data", urlData);
 
   function handlePrint() {
     setPrintPageStatus(true);
@@ -24,14 +22,11 @@ const QRPage = (props) => {
     },
   })
     .then((url) => {
-      //   console.log(url);
       setUrlData(url);
     })
     .catch((err) => {
       console.error(err);
     });
-
-  console.log(printPageStatus);
 
   return (
     <div className="qrHero">

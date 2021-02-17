@@ -25,7 +25,6 @@ function App() {
 
     ReactGa.pageview(window.location.pathname);
     const token = window.localStorage.getItem("StayLogIN");
-    //console.log("app.js token 92", token);
 
     if (token == "false") {
       window.localStorage.clear();

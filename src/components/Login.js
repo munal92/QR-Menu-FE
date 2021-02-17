@@ -80,8 +80,6 @@ const Login = () => {
     }
   };
 
-  console.log("credentials", signInForm.credientials);
-
   return (
     <>
       <Modal
