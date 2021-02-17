@@ -18,8 +18,9 @@
   .signInBtn {
     color: #ffef76 !important;
     border: none !important;
-    border: radius 0px !important;
+    border-radius: 0px !important;
     padding: 0px;
+
     &:hover {
       color: #ffef76 !important;
       background-color: $first;
