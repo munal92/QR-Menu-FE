@@ -21,7 +21,7 @@ function App() {
   const [hideFooter, setHideFooter] = useState(false);
 
   useEffect(() => {
-    ReactGa.initialize("G-4RG4GDSHGD");
+    ReactGa.initialize("UA-170271378-3");
 
     ReactGa.pageview(window.location.pathname);
     const token = window.localStorage.getItem("StayLogIN");
