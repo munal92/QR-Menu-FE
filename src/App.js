@@ -7,6 +7,7 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import UploadPage from "./components/UploadPage";
 import QRPage from "./components/QRPage";
 import Footer from "./components/Footer";
+import ReactGa from "react-ga";
 function App() {
   const history = useHistory();
   const [urlLink, setUrlLink] = useState({
@@ -20,6 +21,9 @@ function App() {
   const [hideFooter, setHideFooter] = useState(false);
 
   useEffect(() => {
+    ReactGa.initialize("G-4RG4GDSHGD");
+
+    ReactGa.pageview(window.location.pathname);
     const token = window.localStorage.getItem("StayLogIN");
     //console.log("app.js token 92", token);
 
