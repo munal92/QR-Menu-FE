@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Container, Button, Row, Col, Modal, Form } from "react-bootstrap";
+import {
+  Container,
+  Button,
+  Row,
+  Col,
+  Modal,
+  Form,
+  Spinner,
+} from "react-bootstrap";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 const Login = () => {
@@ -13,6 +21,7 @@ const Login = () => {
   const history = useHistory();
   const [show, setShow] = useState(true);
   const [isCredentials, isSetCredentials] = useState(true);
+  const [isSpin, setIsSpin] = useState(false);
   const [vibrate, setVibrate] = useState({
     clsName: "",
   });
@@ -42,6 +51,7 @@ const Login = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    setIsSpin(true);
     if (
       signInForm.credientials.username !== "" &&
       signInForm.credientials.password !== ""
@@ -60,10 +70,12 @@ const Login = () => {
             "userEmail",
             signInForm.credientials.email
           );
+          setIsSpin(false);
           history.push("/user");
         })
         .catch((err) => {
           console.log(err);
+          setIsSpin(false);
           isSetCredentials(false);
           setVibrate({ clsName: "error" });
 
@@ -73,7 +85,7 @@ const Login = () => {
         });
     } else {
       setVibrate({ clsName: "error" });
-
+      setIsSpin(false);
       setTimeout(() => {
         setVibrate({ clsName: "" });
       }, 1000);
@@ -154,9 +166,21 @@ const Login = () => {
           <Button variant="info" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="first" type="submit" onClick={submitForm}>
-            Sign In
-          </Button>
+          {isSpin ? (
+            <Button variant="first" disabled>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            </Button>
+          ) : (
+            <Button variant="first" type="submit" onClick={submitForm}>
+              Sign In
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </>

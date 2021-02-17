@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 const SignUpForm = () => {
@@ -11,6 +11,7 @@ const SignUpForm = () => {
     },
   });
   const [isCredentials, isSetCredentials] = useState(true);
+  const [isSpin, setIsSpin] = useState(false);
   const history = useHistory();
 
   const [vibrate, setVibrate] = useState({
@@ -31,6 +32,7 @@ const SignUpForm = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    setIsSpin(true);
     if (
       signUpForm.credientials.name !== "" &&
       signUpForm.credientials.email !== "" &&
@@ -43,11 +45,13 @@ const SignUpForm = () => {
           window.localStorage.setItem("StayLogIN", false);
           window.localStorage.setItem("userEmail", res.data.email);
           setTimeout(() => {
+            setIsSpin(false);
             history.push("/user");
           }, 2000);
         })
         .catch((err) => {
           console.log(err);
+          setIsSpin(false);
           isSetCredentials(false);
           setVibrate({ clsName: "error" });
 
@@ -57,7 +61,7 @@ const SignUpForm = () => {
         });
     } else {
       setVibrate({ clsName: "error" });
-
+      setIsSpin(false);
       setTimeout(() => {
         setVibrate({ clsName: "" });
       }, 1000);
@@ -114,7 +118,19 @@ const SignUpForm = () => {
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group> */}
               <Row className="justify-content-center pt-4">
-                <Button type="submit">Sign Up!</Button>
+                {isSpin ? (
+                  <Button variant="first" disabled>
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                  </Button>
+                ) : (
+                  <Button type="submit">Sign Up!</Button>
+                )}
               </Row>
             </Form>
           </Col>
