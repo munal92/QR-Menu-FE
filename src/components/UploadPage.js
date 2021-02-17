@@ -15,7 +15,7 @@ import {
 import grayBg from "../img/graybg.png";
 import grayBgUpload from "../img/graybgupload.jpg";
 import grayBgUploadSuccess from "../img/graybgUploadSuccess.png";
-
+import Spin from "./Spin";
 const UploadPage = (props) => {
   const inputFile = useRef(null);
   const [selectedFile, SetSelectedFile] = useState({
@@ -45,6 +45,7 @@ const UploadPage = (props) => {
         console.log(err);
       });
   }, []);
+  const [show, setShow] = useState(false);
 
   const onButtonClick = () => {
     // `current` points to the mounted file input element
@@ -67,7 +68,7 @@ const UploadPage = (props) => {
 
   const handleUpload = (e) => {
     e.preventDefault();
-
+    setShow(true);
     const fd = new FormData();
     fd.append("upload", selectedFile.fileLink);
     fd.append("fileName", selectedFile.fileName);
@@ -82,23 +83,27 @@ const UploadPage = (props) => {
           Link: res.data.fileLink,
         });
         SetSelectedFile({ ...selectedFile, uploadSuccess: true });
+        setShow(false);
       })
       .catch((err) => {
         SetSelectedFile({
           ...selectedFile,
           userAlert: "File could not be uploaded. File must be .pdf format",
         });
+        setShow(false);
         console.log(err);
       });
   };
 
   const handleDeleteFile = (e) => {
     e.preventDefault();
+    setShow(true);
     console.log({
       fileLink: selectedFile.fileLink,
     });
 
     if (e.target.id === "removeSelection") {
+      setShow(false);
       SetSelectedFile({
         ...selectedFile,
         fileName: "",
@@ -119,6 +124,7 @@ const UploadPage = (props) => {
             fileName: "",
             Link: "NONE",
           });
+          setShow(false);
           SetSelectedFile({
             ...selectedFile,
             fileName: "",
@@ -128,6 +134,7 @@ const UploadPage = (props) => {
         })
         .catch((err) => {
           console.log(err);
+          setShow(false);
         });
     }
   };
@@ -289,6 +296,8 @@ const UploadPage = (props) => {
           </Col> */}
         </Row>
       </Container>
+
+      <Spin show={show} setShow={setShow} />
     </div>
   );
 };

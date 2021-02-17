@@ -3,4 +3,12 @@ $theme-colors: (
   "success": #25d366,
   "teal1": teal,
 );
+.modal-dialog {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+}
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
