@@ -131,6 +131,7 @@ const Login = () => {
                   <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                      type="password"
                       placeholder="Password"
                       name="password"
                       onChange={handleChange}
@@ -152,10 +153,10 @@ const Login = () => {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="info" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="info" type="submit" onClick={submitForm}>
+          <Button variant="first" type="submit" onClick={submitForm}>
             Sign In
           </Button>
         </Modal.Footer>

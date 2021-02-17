@@ -8,7 +8,10 @@
 // }
 
 .containerHeader {
-  background-color: $mint-cream;
+  // background-color: $white;
+  background-color: $white;
+  background-image: linear-gradient(180deg, $white 80%, $second 100%);
+  color: $first;
 }
 
 .headerTitle {
@@ -22,17 +25,20 @@
 }
 
 .SignupHero {
-  background-color: $mint-cream;
-
+  background-color: $white;
+  color: $first;
   min-height: 82vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   Button {
-    background-color: teal;
+    background-color: $first;
+
+    border: none;
     &:hover {
-      background-color: $midnight-green;
+      color: $first;
+      background-color: $buttonC;
     }
   }
 }
@@ -42,9 +48,9 @@
 }
 
 .MidSecHero {
-  background-color: teal;
-  color: white;
-  min-height: 72vh;
+  background-color: $first;
+  color: $first;
+  min-height: 82vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,12 +59,12 @@
 
 /* footer  */
 #footerSec {
-  background-color: teal;
+  background-color: $first;
   padding: 1rem;
   text-align: center;
 }
 .footerWrapper {
-  color: white;
+  color: $white;
   h4 {
     font-size: 1.1rem;
     font-weight: 400;
@@ -80,6 +86,6 @@
   transform: scale(1);
 }
 .socialMed_cont a:hover {
-  color: yellowgreen;
+  color: $second;
   transform: scale(1.2);
 }

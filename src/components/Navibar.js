@@ -21,10 +21,10 @@ const Navibar = (props) => {
 
   return (
     <>
-      <Navbar className="navibarC" collapseOnSelect expand="lg" variant="dark">
+      <Navbar className="navibarC" collapseOnSelect expand="sm" variant="dark">
         <Container>
           <Navbar.Brand as={Link} to="/" className="logoTxt">
-            QR MENU
+            <span style={{ color: "#ffef76" }}>QR</span> MENU
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -49,7 +49,7 @@ const Navibar = (props) => {
                   Home
                 </Nav.Link>
                 <Nav.Link as={Link} active to="/signin">
-                  Sign In
+                  <a className="signInBtn">Sign In</a>
                 </Nav.Link>{" "}
               </Nav>
             ) : (

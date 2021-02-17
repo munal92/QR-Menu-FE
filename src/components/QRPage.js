@@ -80,7 +80,7 @@ const QRPage = (props) => {
           </Row>{" "}
           <Row className="pt-5">
             <Col className=" text-center" xs={12}>
-              <Button size="lg" onClick={handlePrint}>
+              <Button variant="first" size="lg" onClick={handlePrint}>
                 Print
               </Button>
             </Col>

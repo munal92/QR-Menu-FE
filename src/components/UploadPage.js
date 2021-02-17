@@ -144,10 +144,10 @@ const UploadPage = (props) => {
   console.log("URL STATE", props.urlLink);
   return (
     <div className="uploadPageHero">
-      <Container className="d-flex flex-column justify-content-center pt-5 pb-5">
+      <Container className="d-flex flex-column justify-content-center pt-5 pb-5 ">
         <Row>
           <Col>
-            <h3>Hi {props.urlLink.name},</h3>
+            <h3 style={{ color: "#01384d" }}>Hi {props.urlLink.name},</h3>
           </Col>
         </Row>
         <Row className="mt-4">
@@ -252,7 +252,7 @@ const UploadPage = (props) => {
                 onClick={handleUpload}
                 className=" mr-2"
                 size="md"
-                variant="success"
+                variant="secondary"
                 disabled
               >
                 Upload
@@ -262,7 +262,7 @@ const UploadPage = (props) => {
                 to="/user/qrcode"
                 className=" mr-2"
                 size="md"
-                variant="primary"
+                variant="second"
               >
                 QR code
               </Button>{" "}
@@ -274,11 +274,11 @@ const UploadPage = (props) => {
                 onClick={handleUpload}
                 className=" mr-2"
                 size="md"
-                variant="success"
+                variant="first"
               >
                 Upload
               </Button>
-              <Button className=" mr-2" size="md" variant="primary" disabled>
+              <Button className=" mr-2" size="md" variant="secondary" disabled>
                 QR code
               </Button>
             </Col>

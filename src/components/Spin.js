@@ -16,7 +16,7 @@ const Spin = (props) => {
           <Row className="align-items-center justify-content-center ">
             <Modal.Body>
               <Row className="p-3 justify-content-center">
-                <Spinner animation="border" variant="teal1" />
+                <Spinner animation="border" variant="first" />
               </Row>
             </Modal.Body>
           </Row>

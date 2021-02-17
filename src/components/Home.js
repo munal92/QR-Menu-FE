@@ -16,7 +16,7 @@ const Home = () => {
               </Row>
               <Row className="headerSubTitle  mb-5">Quick.Simple.Free.</Row>
               <Row className="homeButtonCont  mb-5">
-                <Button href="#signupF" size="lg" variant="teal1">
+                <Button href="#signupF" size="lg" variant="first">
                   Sign Up
                 </Button>{" "}
               </Row>
