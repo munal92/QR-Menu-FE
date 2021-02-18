@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axiosWithAuth from "../utils/axiosWithAuth";
 import SignUpForm from "./SignUpForm.js";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import phoneImg from "../img/phoneHe.png";
 import MidSection from "./MidSection.js";
 
 const Home = () => {
+  /// since the heroku server is free for better user experince making a get req
+  /// to wake up the server :)
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
   return (
     <>
       <div className="containerHeader">
