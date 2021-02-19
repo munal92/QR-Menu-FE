@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import {
@@ -25,6 +25,7 @@ const UploadPage = (props) => {
     uploadSuccess: false,
     userAlert: "*Maximum upload .pdf file size: 5 MB.",
   });
+  const history = useHistory();
 
   useEffect(() => {
     const email = window.localStorage.getItem("userEmail");
@@ -43,6 +44,8 @@ const UploadPage = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        window.localStorage.clear();
+        history.push("/");
       });
   }, []);
   const [show, setShow] = useState(false);
