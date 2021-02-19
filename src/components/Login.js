@@ -19,17 +19,22 @@ const Login = () => {
     isChecked: false,
   });
   const history = useHistory();
+  /// Modal view on/off
   const [show, setShow] = useState(true);
+  /// checking credentials
   const [isCredentials, isSetCredentials] = useState(true);
+  /// progress spin
   const [isSpin, setIsSpin] = useState(false);
+  /// for vibrate animation
   const [vibrate, setVibrate] = useState({
     clsName: "",
   });
+
   const handleClose = () => {
     setShow(false);
     history.push("/");
   };
-
+  /// form changes
   const handleChange = (e) => {
     e.persist();
 
@@ -146,7 +151,6 @@ const Login = () => {
                       name="password"
                       onChange={handleChange}
                     />
-                    {/* <Form.Control type="password" placeholder="Password" /> */}
                   </Form.Group>
                   <Form.Group controlId="formBasicCheckbox">
                     <Form.Check

@@ -24,6 +24,7 @@ function App() {
     ReactGa.initialize("UA-170271378-3");
 
     ReactGa.pageview(window.location.pathname);
+    /// it's for keep me sign in option
     const token = window.localStorage.getItem("StayLogIN");
 
     if (token == "false") {
@@ -31,22 +32,10 @@ function App() {
     }
   }, []);
 
-  // const token = window.localStorage.getItem("StayLogIN");
-
-  // if (token === "true") {
-  //   history.push("/user");
-  // } else {
-  //   window.localStorage.removeItem("token");
-  //   //  history.push("/");
-  // }
-  // }, []);
   return (
     <>
       <Navibar urlLink={urlLink} />
       <Switch>
-        {/* <Route path="/user">
-          <UploadPage />
-        </Route> */}
         <PrivateRoute
           path="/user/qrcode"
           urlLink={urlLink}

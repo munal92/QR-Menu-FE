@@ -17,6 +17,7 @@ import grayBgUpload from "../img/graybgupload.jpg";
 import grayBgUploadSuccess from "../img/graybgUploadSuccess.png";
 import Spin from "./Spin";
 const UploadPage = (props) => {
+  /// for <input> tag
   const inputFile = useRef(null);
   const [selectedFile, SetSelectedFile] = useState({
     fileName: "",
@@ -272,17 +273,6 @@ const UploadPage = (props) => {
               </Button>
             </Col>
           )}
-
-          {/* <Button size="lg" variant="danger">
-              Delete
-            </Button>{" "} */}
-
-          {/* <Col xs={5}>
-            
-          </Col>
-          <Col xs={4}>
-            
-          </Col> */}
         </Row>
       </Container>
 

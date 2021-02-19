@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { Route, Link } from "react-router-dom";
-
 import Login from "./Login.js";
-const Navibar = (props) => {
+
+const Navibar = () => {
   const [navbarStatus, setNavbarStatus] = useState(false);
+  /// if user click the logout, clean the local storage
   const clearToken = (e) => {
     setNavbarStatus(false);
     window.localStorage.clear();
   };
-
+  /// checking token and show profile button or not
   useEffect(() => {
     let status = window.localStorage.getItem("token");
     if (status) {
@@ -28,19 +29,7 @@ const Navibar = (props) => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-              {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown> */}
-            </Nav>
+            <Nav className="mr-auto"></Nav>
 
             {navbarStatus !== true ? (
               <Nav>

@@ -17,8 +17,8 @@ const QRPage = (props) => {
 
   QRCodeLib.toDataURL(props.urlLink.Link, {
     color: {
-      dark: "#000", // Blue dots
-      light: "#0000", // Transparent background
+      dark: "#000",
+      light: "#0000",
     },
   })
     .then((url) => {

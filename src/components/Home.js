@@ -11,9 +11,7 @@ const Home = () => {
   useEffect(() => {
     axiosWithAuth()
       .get("/")
-      .then((res) => {
-        console.log(res);
-      })
+      .then()
       .catch((err) => {
         console.error(err);
       });
