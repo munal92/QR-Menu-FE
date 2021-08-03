@@ -39,12 +39,19 @@
 
 .MidSecHero {
   background-color: $first;
-  color: $first;
+  color: $second;
   min-height: 82vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .midsecCont {
+    background-color: $first !important;
+  }
+  h2 {
+    border-color: $second !important;
+  }
 }
 
 /* footer  */
